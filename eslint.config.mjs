@@ -22,6 +22,12 @@ const eslintConfig = defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
+      "sort-imports": [
+        "error",
+        {
+          ignoreDeclarationSort: true,
+        },
+      ],
     },
   },
   // Override default ignores of eslint-config-next.
