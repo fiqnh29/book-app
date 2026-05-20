@@ -2,7 +2,9 @@ import { Geist_Mono, Outfit } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { QueryProvider } from "@/components/query-provider"
 import { cn } from "@/lib/utils"
+import NextTopLoader from "nextjs-toploader"
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -28,7 +30,17 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <NextTopLoader
+            color="var(--color-primary)"
+            crawl={true}
+            easing="ease"
+            height={4}
+            showAtBottom={false}
+            showSpinner={false}
+          />
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

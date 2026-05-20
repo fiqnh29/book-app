@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mongo:latest
+    container_name: book-app-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: book-app-web
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://db:27017/book-app
+      - GOOGLE_BOOKS_API_URL=https://www.googleapis.com/books/v1/volumes
+      - GOOGLE_BOOKS_API_KEY=AIzaSyB68ci7gGZVHlaMMDbVRzZXIF6x9DdgAS0
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  mongo-data:
